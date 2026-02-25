@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lucky Immigration Services</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 /* ---------------- GENERAL ---------------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Roboto',sans-serif;background:#121212;color:#fff;scroll-behavior:smooth;}
 a{text-decoration:none;color:inherit;}
-section{padding:80px 20px;transition:all 0.5s ease-in-out;}
+section{padding:80px 20px;transition:all 0.6s ease-in-out;}
 h1,h2,h3{margin-bottom:20px;}
 button{cursor:pointer;transition:0.3s;}
-button:hover{opacity:0.8;}
+button:hover{opacity:0.85;}
+img{max-width:100%;display:block;}
 
 /* ---------------- NAVBAR ---------------- */
 nav{position:fixed;width:100%;top:0;left:0;background:rgba(18,18,18,0.95);display:flex;justify-content:space-between;align-items:center;padding:15px 50px;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.5);}
@@ -21,48 +23,56 @@ nav .logo{font-size:24px;font-weight:bold;color:#ffcc00;}
 nav ul{list-style:none;display:flex;gap:25px;}
 nav ul li a{font-size:16px;color:#fff;}
 nav ul li a:hover{color:#ffcc00;}
+/* Hamburger menu */
+nav .menu-toggle{display:none;font-size:24px;cursor:pointer;color:#ffcc00;}
 
 /* ---------------- HERO ---------------- */
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100vh;background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://images.pexels.com/photos/261908/pexels-photo-261908.jpeg') center/cover no-repeat;}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100vh;
+background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.pexels.com/photos/261908/pexels-photo-261908.jpeg') center/cover no-repeat;
+background-attachment: fixed;}
 .hero h1{font-size:48px;margin-bottom:20px;animation:fadeInDown 1s;}
 .hero p{font-size:20px;margin-bottom:30px;animation:fadeInUp 1s;}
-.hero button{padding:15px 30px;border:none;border-radius:10px;background:#ffcc00;color:#000;font-weight:bold;animation:fadeInUp 1.5s;}
+.hero button{padding:15px 35px;border:none;border-radius:10px;background:#ffcc00;color:#000;font-weight:bold;animation:fadeInUp 1.5s;}
 @keyframes fadeInDown{0%{opacity:0;transform:translateY(-50px);}100%{opacity:1;transform:translateY(0);}}
 @keyframes fadeInUp{0%{opacity:0;transform:translateY(50px);}100%{opacity:1;transform:translateY(0);}}
 
 /* ---------------- SECTIONS ---------------- */
 section{max-width:1200px;margin:0 auto;}
-section h2{color:#ffcc00;font-size:32px;text-align:center;margin-bottom:40px;}
+section h2{color:#ffcc00;font-size:32px;text-align:center;margin-bottom:50px;}
 
 /* ---------------- SERVICES ---------------- */
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.service-card{background:#1e1e1e;padding:20px;border-radius:15px;text-align:center;transition:0.3s;}
-.service-card:hover{transform:translateY(-10px);box-shadow:0 0 20px #ffcc00;}
-.service-card img{width:80px;margin-bottom:15px;}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;}
+.service-card{background:#1e1e1e;padding:30px;border-radius:15px;text-align:center;transition:0.5s;transform:translateY(50px);opacity:0;}
+.service-card img{width:80px;margin-bottom:20px;}
+.service-card h3{margin-bottom:15px;}
+.service-card p{color:#ccc;line-height:1.6;}
+.service-card.visible{transform:translateY(0);opacity:1;}
 
 /* ---------------- ABOUT ---------------- */
 .about{text-align:center;line-height:1.8;}
-.about img{width:300px;border-radius:20px;margin-top:20px;}
+.about img{width:300px;border-radius:20px;margin-top:20px;animation:fadeIn 1s;}
+@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
 
 /* ---------------- TESTIMONIALS ---------------- */
-.testimonials{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
-.testimonial-card{background:#1e1e1e;padding:20px;border-radius:15px;width:300px;transition:0.3s;}
-.testimonial-card:hover{transform:scale(1.05);}
-.testimonial-card p{margin-bottom:15px;font-style:italic;}
-.testimonial-card h4{font-weight:bold;}
+.testimonials-container{position:relative;overflow:hidden;}
+.testimonials{display:flex;transition:transform 0.5s ease-in-out;}
+.testimonial-card{background:#1e1e1e;padding:20px;border-radius:15px;width:300px;margin:0 10px;flex-shrink:0;transition:0.3s;}
+.testimonial-card p{margin-bottom:15px;font-style:italic;color:#ccc;}
+.testimonial-card h4{font-weight:bold;color:#ffcc00;}
 
 /* ---------------- FAQ ---------------- */
 .faq{max-width:800px;margin:0 auto;}
 .faq-item{margin-bottom:15px;border-bottom:1px solid #333;padding-bottom:10px;}
-.faq-item h4{cursor:pointer;position:relative;padding-right:20px;}
-.faq-item h4::after{content:'+';position:absolute;right:0;top:0;}
+.faq-item h4{cursor:pointer;position:relative;padding-right:25px;}
+.faq-item h4::after{content:'+';position:absolute;right:0;top:0;font-size:20px;}
 .faq-item.active h4::after{content:'-';}
 .faq-item p{display:none;margin-top:10px;line-height:1.6;}
 .faq-item.active p{display:block;}
 
 /* ---------------- CONTACT ---------------- */
 .contact{display:flex;flex-direction:column;align-items:center;text-align:center;}
-.contact a{display:flex;align-items:center;gap:10px;padding:12px 25px;border-radius:10px;background:#25d366;color:#fff;font-weight:bold;margin-top:20px;}
+.contact a{display:flex;align-items:center;gap:10px;padding:12px 25px;border-radius:10px;background:#25d366;color:#fff;font-weight:bold;margin-top:20px;transition:0.3s;}
+.contact a:hover{background:#128c7e;}
 .contact a img{width:25px;}
 
 /* ---------------- PRIVACY ---------------- */
@@ -71,8 +81,19 @@ section h2{color:#ffcc00;font-size:32px;text-align:center;margin-bottom:40px;}
 /* ---------------- FOOTER ---------------- */
 footer{text-align:center;padding:30px;background:#111;color:#888;}
 
+/* ---------------- STICKY WHATSAPP BUTTON ---------------- */
+.whatsapp-btn{position:fixed;bottom:30px;right:30px;background:#25d366;color:#fff;padding:15px 20px;border-radius:50px;display:flex;align-items:center;gap:10px;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.5);z-index:999;transition:0.3s;}
+.whatsapp-btn:hover{background:#128c7e;}
+
 /* ---------------- RESPONSIVE ---------------- */
-@media(max-width:768px){nav{padding:15px 20px;}nav ul{gap:15px;} .hero h1{font-size:36px;} .hero p{font-size:18px;}}
+@media(max-width:768px){
+  nav{padding:15px 20px;}
+  nav ul{position:fixed;top:60px;right:-100%;flex-direction:column;background:#121212;height:calc(100vh - 60px);width:200px;padding:30px;gap:20px;transition:0.3s;}
+  nav ul.active{right:0;}
+  nav .menu-toggle{display:block;}
+  .hero h1{font-size:36px;}
+  .hero p{font-size:18px;}
+}
 </style>
 </head>
 <body>
@@ -80,7 +101,8 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
 <!-- NAVBAR -->
 <nav>
   <div class="logo">Lucky Immigration</div>
-  <ul>
+  <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
+  <ul id="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
@@ -102,21 +124,9 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
 <section id="services">
   <h2>Our Services</h2>
   <div class="services">
-    <div class="service-card">
-      <img src="https://img.icons8.com/ios-filled/100/ffcc00/passport.png" alt="Visa">
-      <h3>Visa Processing</h3>
-      <p>We handle all types of visas including work, student, and travel visas with ease.</p>
-    </div>
-    <div class="service-card">
-      <img src="https://img.icons8.com/ios-filled/100/ffcc00/plane.png" alt="Immigration">
-      <h3>Immigration Consulting</h3>
-      <p>Expert guidance for permanent residency and citizenship applications worldwide.</p>
-    </div>
-    <div class="service-card">
-      <img src="https://img.icons8.com/ios-filled/100/ffcc00/legal.png" alt="Legal">
-      <h3>Legal Assistance</h3>
-      <p>Professional legal support to ensure your immigration process is smooth and compliant.</p>
-    </div>
+    <div class="service-card"><img src="https://img.icons8.com/ios-filled/100/ffcc00/passport.png"><h3>Visa Processing</h3><p>All types of visas including work, student, and travel visas handled easily.</p></div>
+    <div class="service-card"><img src="https://img.icons8.com/ios-filled/100/ffcc00/plane.png"><h3>Immigration Consulting</h3><p>Expert guidance for permanent residency and citizenship applications worldwide.</p></div>
+    <div class="service-card"><img src="https://img.icons8.com/ios-filled/100/ffcc00/legal.png"><h3>Legal Assistance</h3><p>Professional legal support ensures your immigration process is smooth and compliant.</p></div>
   </div>
 </section>
 
@@ -130,18 +140,11 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <h2>Testimonials</h2>
-  <div class="testimonials">
-    <div class="testimonial-card">
-      <p>"Lucky Immigration made my visa process so easy and stress-free!"</p>
-      <h4>— John Doe</h4>
-    </div>
-    <div class="testimonial-card">
-      <p>"Highly professional and always available to answer my questions."</p>
-      <h4>— Sarah Smith</h4>
-    </div>
-    <div class="testimonial-card">
-      <p>"Thanks to Lucky Immigration, I got my dream job abroad!"</p>
-      <h4>— Ahmed Khan</h4>
+  <div class="testimonials-container">
+    <div class="testimonials" id="testimonial-track">
+      <div class="testimonial-card"><p>"Lucky Immigration made my visa process so easy and stress-free!"</p><h4>— John Doe</h4></div>
+      <div class="testimonial-card"><p>"Highly professional and always available to answer my questions."</p><h4>— Sarah Smith</h4></div>
+      <div class="testimonial-card"><p>"Thanks to Lucky Immigration, I got my dream job abroad!"</p><h4>— Ahmed Khan</h4></div>
     </div>
   </div>
 </section>
@@ -150,18 +153,9 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
 <section id="faq">
   <h2>Frequently Asked Questions</h2>
   <div class="faq">
-    <div class="faq-item">
-      <h4>What documents are required for visa?</h4>
-      <p>Documents vary depending on visa type. Generally, passport, photos, and application forms are required.</p>
-    </div>
-    <div class="faq-item">
-      <h4>How long does the immigration process take?</h4>
-      <p>Processing times vary by country and visa type. We provide realistic timelines for each case.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Do you provide legal assistance?</h4>
-      <p>Yes, our team of immigration lawyers ensures all applications are compliant with regulations.</p>
-    </div>
+    <div class="faq-item"><h4>What documents are required for visa?</h4><p>Documents vary depending on visa type. Generally, passport, photos, and application forms are required.</p></div>
+    <div class="faq-item"><h4>How long does the immigration process take?</h4><p>Processing times vary by country and visa type. We provide realistic timelines for each case.</p></div>
+    <div class="faq-item"><h4>Do you provide legal assistance?</h4><p>Yes, our team of immigration lawyers ensures all applications are compliant with regulations.</p></div>
   </div>
 </section>
 
@@ -170,10 +164,7 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
   <h2>Contact Us</h2>
   <div class="contact">
     <p>Call / WhatsApp us anytime for consultation:</p>
-    <a href="https://wa.me/9800000000" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
-      98*******0
-    </a>
+    <a href="https://wa.me/9800000000" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">98*******0</a>
   </div>
 </section>
 
@@ -186,18 +177,44 @@ footer{text-align:center;padding:30px;background:#111;color:#888;}
   </div>
 </section>
 
+<!-- STICKY WHATSAPP BUTTON -->
+<a href="https://wa.me/9800000000" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+
 <!-- FOOTER -->
-<footer>
-  &copy; 2026 Lucky Immigration Services. All rights reserved.
-</footer>
+<footer>&copy; 2026 Lucky Immigration Services. All rights reserved.</footer>
 
 <script>
+// ---------------- MOBILE MENU ----------------
+function toggleMenu(){
+  document.getElementById('nav-links').classList.toggle('active');
+}
+
 // ---------------- FAQ TOGGLE ----------------
 document.querySelectorAll('.faq-item h4').forEach(item=>{
   item.addEventListener('click',()=>{
     item.parentElement.classList.toggle('active');
   });
 });
+
+// ---------------- SERVICE ANIMATION ON SCROLL ----------------
+const serviceCards = document.querySelectorAll('.service-card');
+window.addEventListener('scroll',()=>{
+  serviceCards.forEach(card=>{
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      card.classList.add('visible');
+    }
+  });
+});
+
+// ---------------- TESTIMONIAL AUTO-SLIDE ----------------
+let testimonialIndex = 0;
+const testimonialTrack = document.getElementById('testimonial-track');
+setInterval(()=>{
+  testimonialIndex++;
+  if(testimonialIndex > 2) testimonialIndex=0;
+  testimonialTrack.style.transform = `translateX(-${testimonialIndex*320}px)`;
+},4000);
 </script>
 
 </body>
