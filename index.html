@@ -3,259 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMW M SERIES | Ultimate Configurator & Game</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<title>Lucky Immigration Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg:#000; 
-    --text:#fff; 
-    --card:#111; 
-    --primary:#0d47a1; 
-    --secondary:#ffcc00;
-    --accent:#ff5733;
-}
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body {background:var(--bg);color:var(--text);overflow-x:hidden;transition:0.5s;}
-button {cursor:pointer;}
+/* ---------------- GENERAL ---------------- */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Roboto',sans-serif;background:#121212;color:#fff;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+section{padding:80px 20px;transition:all 0.5s ease-in-out;}
+h1,h2,h3{margin-bottom:20px;}
+button{cursor:pointer;transition:0.3s;}
+button:hover{opacity:0.8;}
 
-/* LOGIN PANEL */
-#loginPanel{
-    background:#111;padding:40px;border-radius:25px;width:400px;margin:100px auto;text-align:center;box-shadow:0 0 30px rgba(0,0,0,0.8);
-    animation: fadeIn 1s forwards;
-}
-#loginPanel h2 {margin-bottom:20px;font-size:28px;}
-#loginPanel input{display:block;width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px;}
-#loginPanel button{padding:15px 30px;border:none;border-radius:25px;background:var(--primary);color:#fff;cursor:pointer;margin-top:10px;font-size:16px;transition:0.3s;}
-#loginPanel button:hover{background:var(--secondary);color:#000;}
+/* ---------------- NAVBAR ---------------- */
+nav{position:fixed;width:100%;top:0;left:0;background:rgba(18,18,18,0.95);display:flex;justify-content:space-between;align-items:center;padding:15px 50px;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.5);}
+nav .logo{font-size:24px;font-weight:bold;color:#ffcc00;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav ul li a{font-size:16px;color:#fff;}
+nav ul li a:hover{color:#ffcc00;}
 
-/* HERO SECTION */
-.hero {
-    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.9)), url('https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg') center/cover no-repeat;
-    text-align:center;
-    padding:150px 20px;
-    opacity:0;
-}
-.hero h1{font-size:60px;letter-spacing:4px;margin-bottom:20px;opacity:0;}
-.hero p{font-size:20px;margin-bottom:40px;opacity:0;}
-.hero button{padding:15px 40px;font-size:18px;border:none;border-radius:30px;background:var(--primary);color:#fff;opacity:0;transition:0.3s;}
-.hero button:hover{background:var(--secondary);color:#000;}
+/* ---------------- HERO ---------------- */
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100vh;background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('https://images.pexels.com/photos/261908/pexels-photo-261908.jpeg') center/cover no-repeat;}
+.hero h1{font-size:48px;margin-bottom:20px;animation:fadeInDown 1s;}
+.hero p{font-size:20px;margin-bottom:30px;animation:fadeInUp 1s;}
+.hero button{padding:15px 30px;border:none;border-radius:10px;background:#ffcc00;color:#000;font-weight:bold;animation:fadeInUp 1.5s;}
+@keyframes fadeInDown{0%{opacity:0;transform:translateY(-50px);}100%{opacity:1;transform:translateY(0);}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(50px);}100%{opacity:1;transform:translateY(0);}}
 
-/* MODELS CARDS */
-.models{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin:60px 0;
-}
-.card{
-    background:var(--card);
-    padding:20px;
-    margin:20px;
-    border-radius:25px;
-    box-shadow:0 15px 50px rgba(0,0,0,0.7);
-    transition:0.5s;
-    width:240px;
-    cursor:pointer;
-    overflow:hidden;
-    position:relative;
-}
-.card img{width:100%;border-radius:20px;transition:0.5s;}
-.card:hover img{transform:scale(1.1);}
-.card h3{margin-top:15px;text-align:center;font-size:18px;color:#fff;}
-.card .card-overlay{
-    position:absolute;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.5);
-    opacity:0;transition:0.5s;border-radius:25px;
-}
-.card:hover .card-overlay{opacity:1;}
+/* ---------------- SECTIONS ---------------- */
+section{max-width:1200px;margin:0 auto;}
+section h2{color:#ffcc00;font-size:32px;text-align:center;margin-bottom:40px;}
 
-/* STORY PANEL */
-.story-panel{
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.95);
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:1001;
-    padding:30px;
-    overflow-y:auto;
-}
-.story-panel.active{display:flex;}
-.story-panel img{max-width:450px;border-radius:25px;margin-bottom:25px;}
-.story-panel h2{font-size:40px;margin-bottom:15px;}
-.story-panel p{font-size:18px;line-height:1.6;margin-bottom:25px;max-width:700px;text-align:left;}
-.story-panel button{padding:15px 30px;border:none;border-radius:25px;background:var(--primary);color:#fff;cursor:pointer;margin:10px;transition:0.3s;}
-.story-panel button:hover{background:var(--secondary);color:#000;}
+/* ---------------- SERVICES ---------------- */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.service-card{background:#1e1e1e;padding:20px;border-radius:15px;text-align:center;transition:0.3s;}
+.service-card:hover{transform:translateY(-10px);box-shadow:0 0 20px #ffcc00;}
+.service-card img{width:80px;margin-bottom:15px;}
 
-/* START GAME BUTTON */
-#startGameBtn{
-    display:block;
-    margin:50px auto;
-    padding:20px 50px;
-    font-size:22px;
-    border:none;
-    border-radius:30px;
-    background:var(--primary);
-    color:#fff;
-    cursor:pointer;
-    transition:0.3s;
-    opacity:0;
-}
-#startGameBtn:hover{background:var(--secondary);color:#000;}
+/* ---------------- ABOUT ---------------- */
+.about{text-align:center;line-height:1.8;}
+.about img{width:300px;border-radius:20px;margin-top:20px;}
 
-/* GAME PANEL */
-#gamePanel{
-    display:none;
-    margin:50px auto;
-    max-width:1000px;
-    padding:40px;
-    background:#222;
-    border-radius:25px;
-    color:#fff;
-    text-align:center;
-}
-#coinsDisplay{
-    position:fixed;
-    top:20px;
-    right:30px;
-    font-size:20px;
-    background:#222;
-    padding:15px 20px;
-    border-radius:20px;
-    display:none;
-}
+/* ---------------- TESTIMONIALS ---------------- */
+.testimonials{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.testimonial-card{background:#1e1e1e;padding:20px;border-radius:15px;width:300px;transition:0.3s;}
+.testimonial-card:hover{transform:scale(1.05);}
+.testimonial-card p{margin-bottom:15px;font-style:italic;}
+.testimonial-card h4{font-weight:bold;}
 
-/* FOOTER */
-footer{color:#888;text-align:center;margin:60px 0 20px;font-size:16px;opacity:0;}
+/* ---------------- FAQ ---------------- */
+.faq{max-width:800px;margin:0 auto;}
+.faq-item{margin-bottom:15px;border-bottom:1px solid #333;padding-bottom:10px;}
+.faq-item h4{cursor:pointer;position:relative;padding-right:20px;}
+.faq-item h4::after{content:'+';position:absolute;right:0;top:0;}
+.faq-item.active h4::after{content:'-';}
+.faq-item p{display:none;margin-top:10px;line-height:1.6;}
+.faq-item.active p{display:block;}
 
-/* ANIMATIONS */
-@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+/* ---------------- CONTACT ---------------- */
+.contact{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.contact a{display:flex;align-items:center;gap:10px;padding:12px 25px;border-radius:10px;background:#25d366;color:#fff;font-weight:bold;margin-top:20px;}
+.contact a img{width:25px;}
+
+/* ---------------- PRIVACY ---------------- */
+.privacy{max-width:900px;margin:0 auto;line-height:1.8;color:#ccc;text-align:left;}
+
+/* ---------------- FOOTER ---------------- */
+footer{text-align:center;padding:30px;background:#111;color:#888;}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media(max-width:768px){nav{padding:15px 20px;}nav ul{gap:15px;} .hero h1{font-size:36px;} .hero p{font-size:18px;}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN PANEL -->
-<div id="loginPanel">
-    <h2>Welcome to BMW M SERIES</h2>
-    <input type="text" id="username" placeholder="Enter your name">
-    <button onclick="login()">Login</button>
-</div>
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Lucky Immigration</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#privacy">Privacy & Policy</a></li>
+  </ul>
+</nav>
 
-<!-- HERO SECTION -->
-<div id="mainContent" style="display:none;">
-    <div class="hero" id="heroSection">
-        <h1>BMW M SERIES | Ultimate Configurator</h1>
-        <p>Explore and customize your dream BMW interactively!</p>
-        <button>Explore Models</button>
-        <div class="models" id="modelsContainer">
-            <!-- We'll generate multiple cards dynamically to make it huge -->
-        </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1>Immigrate Smoothly With Experts</h1>
+  <p>Your trusted partner in global immigration services</p>
+  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="service-card">
+      <img src="https://img.icons8.com/ios-filled/100/ffcc00/passport.png" alt="Visa">
+      <h3>Visa Processing</h3>
+      <p>We handle all types of visas including work, student, and travel visas with ease.</p>
     </div>
-
-    <!-- START GAME BUTTON -->
-    <button id="startGameBtn" onclick="startGame()">Start Game</button>
-
-    <!-- GAME PANEL -->
-    <div id="gamePanel">
-        <h2>Dream Car Game Panel</h2>
-        <p>Here goes your coins, progress, and interactions.</p>
-        <div id="coinsDisplay">Coins: 0</div>
-        <!-- You can inject your original dream car game code here -->
+    <div class="service-card">
+      <img src="https://img.icons8.com/ios-filled/100/ffcc00/plane.png" alt="Immigration">
+      <h3>Immigration Consulting</h3>
+      <p>Expert guidance for permanent residency and citizenship applications worldwide.</p>
     </div>
-</div>
+    <div class="service-card">
+      <img src="https://img.icons8.com/ios-filled/100/ffcc00/legal.png" alt="Legal">
+      <h3>Legal Assistance</h3>
+      <p>Professional legal support to ensure your immigration process is smooth and compliant.</p>
+    </div>
+  </div>
+</section>
 
-<footer>Created professionally by Sunveer</footer>
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p class="about">Lucky Immigration Services is dedicated to helping clients navigate the complex process of international immigration. With years of experience, we ensure a hassle-free journey for individuals and families seeking opportunities abroad.</p>
+  <img src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg" alt="About Image">
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h2>Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonial-card">
+      <p>"Lucky Immigration made my visa process so easy and stress-free!"</p>
+      <h4>— John Doe</h4>
+    </div>
+    <div class="testimonial-card">
+      <p>"Highly professional and always available to answer my questions."</p>
+      <h4>— Sarah Smith</h4>
+    </div>
+    <div class="testimonial-card">
+      <p>"Thanks to Lucky Immigration, I got my dream job abroad!"</p>
+      <h4>— Ahmed Khan</h4>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <h4>What documents are required for visa?</h4>
+      <p>Documents vary depending on visa type. Generally, passport, photos, and application forms are required.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How long does the immigration process take?</h4>
+      <p>Processing times vary by country and visa type. We provide realistic timelines for each case.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you provide legal assistance?</h4>
+      <p>Yes, our team of immigration lawyers ensures all applications are compliant with regulations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact">
+    <p>Call / WhatsApp us anytime for consultation:</p>
+    <a href="https://wa.me/9800000000" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+      98*******0
+    </a>
+  </div>
+</section>
+
+<!-- PRIVACY & POLICY -->
+<section id="privacy">
+  <h2>Privacy & Policy</h2>
+  <div class="privacy">
+    <p>At Lucky Immigration Services, we respect your privacy. Any personal information provided will be used solely for immigration services and consultations. We do not share your data with third parties without your consent. By contacting or using our services, you agree to our privacy policy.</p>
+    <p>We use secure communication channels, including encrypted messaging and secure storage, to ensure the safety of your personal information. Our team is committed to protecting your data and providing transparency in all processes.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Lucky Immigration Services. All rights reserved.
+</footer>
 
 <script>
-// Persistent login
-window.onload = function(){
-    const savedUser = localStorage.getItem('bmwUser');
-    if(savedUser){
-        document.getElementById('loginPanel').style.display='none';
-        document.getElementById('mainContent').style.display='block';
-        animateHero();
-        showStartButton();
-    } else {
-        document.getElementById('loginPanel').style.display='block';
-    }
-}
-
-// Login function
-function login(){
-    const username = document.getElementById('username').value.trim();
-    if(username){
-        localStorage.setItem('bmwUser', username);
-        document.getElementById('loginPanel').style.display='none';
-        document.getElementById('mainContent').style.display='block';
-        animateHero();
-        showStartButton();
-        alert(`Welcome, ${username}! Scroll down and click Start Game to play.`);
-    } else {
-        alert('Please enter your name');
-    }
-}
-
-// Animate hero and title
-function animateHero(){
-    gsap.to("#heroSection",{opacity:1,duration:1});
-    gsap.from("#heroSection h1",{opacity:0,y:-50,duration:1});
-    gsap.from("#heroSection p",{opacity:0,y:50,duration:1,delay:0.5});
-    gsap.from("#heroSection button",{opacity:0,y:30,duration:1,delay:1});
-}
-
-// Generate 20+ cards dynamically for mega page
-const modelsContainer = document.getElementById('modelsContainer');
-const carNames = ["M3","M4","M5","M6","X5 M","X6 M","Z4","i4","iX","M8","i7","M2","M760","M135","X3 M","X4 M","X7 M","iX1","iX3","M550"];
-for(let i=0;i<carNames.length;i++){
-    const card = document.createElement('div');
-    card.className='card';
-    card.innerHTML = `<img src='https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg'><h3>${carNames[i]}</h3><div class="card-overlay"></div>`;
-    card.onclick = function(){openStory(carNames[i]);};
-    modelsContainer.appendChild(card);
-}
-
-// Story panel dynamic content
-function openStory(car){
-    let storyPanel = document.querySelector('.story-panel');
-    if(!storyPanel){
-        storyPanel = document.createElement('div');
-        storyPanel.className='story-panel';
-        document.body.appendChild(storyPanel);
-    }
-    storyPanel.innerHTML=`<h2>${car} Details</h2>
-    <img src='https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg'>
-    <p>Explore the ${car} with full specs, interior options, and driving dynamics.</p>
-    <button onclick="this.parentElement.classList.remove('active')">Close</button>
-    <button onclick="alert('Customize ${car} coming soon!')">Customize</button>`;
-    storyPanel.classList.add('active');
-    gsap.from(".story-panel",{opacity:0,scale:0.5,duration:0.7});
-}
-
-// Show start game button after scroll
-function showStartButton(){
-    const btn = document.getElementById('startGameBtn');
-    gsap.to(btn,{opacity:1,duration:1,delay:2});
-}
-
-// Start game panel
-function startGame(){
-    const gamePanel = document.getElementById('gamePanel');
-    gamePanel.style.display='block';
-    gsap.from(gamePanel,{opacity:0,y:50,duration:1});
-    const coinsDisplay = document.getElementById('coinsDisplay');
-    coinsDisplay.style.display='block';
-}
-
-// Footer animation on scroll
-window.addEventListener('scroll',function(){
-    const footer = document.querySelector('footer');
-    if(window.scrollY+window.innerHeight > footer.offsetTop){
-        gsap.to(footer,{opacity:1,duration:1});
-    }
+// ---------------- FAQ TOGGLE ----------------
+document.querySelectorAll('.faq-item h4').forEach(item=>{
+  item.addEventListener('click',()=>{
+    item.parentElement.classList.toggle('active');
+  });
 });
 </script>
 
