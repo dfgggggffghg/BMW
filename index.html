@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMW M SERIES | Full Configurator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style>
+:root{
+  --bg:#000; --text:#fff; --card:#111; --primary:#0d47a1; --secondary:#ffcc00;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);transition:0.5s;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* Credit & Hamburger */
+.credit-btn{position:fixed;top:20px;left:20px;z-index:1000;background:rgba(0,0,0,0.6);padding:10px 18px;border-radius:25px;backdrop-filter:blur(10px);cursor:pointer;transition:0.4s;text-align:center;}
+.credit-btn:hover{background:var(--primary);}
+.credit-btn p{font-size:13px;line-height:18px;}
+.hamburger{position:fixed;top:20px;right:20px;z-index:1000;cursor:pointer;}
+.hamburger div{width:28px;height:3px;background:var(--text);margin:6px 0;border-radius:10px;}
+
+/* Settings Panel */
+.settings{position:fixed;right:-300px;top:0;width:280px;height:100%;background:var(--card);padding:30px 20px;transition:0.6s;border-radius:40px 0 0 40px;box-shadow:-10px 0 40px rgba(0,0,0,0.6);z-index:999;}
+.settings.active{ right:0; }
+.btn{display:block;width:100%;padding:10px;margin:8px 0;border:none;border-radius:20px;cursor:pointer;background:var(--primary);color:#fff;transition:0.3s;}
+.btn:hover{transform:scale(1.05);}
+
+/* Hero */
+.hero{background:linear-gradient(145deg,#000,#111);position:relative;text-align:center;padding:80px 20px;}
+.hero h1{font-size:50px;letter-spacing:4px;margin-bottom:10px;opacity:0;}
+.hero p{font-size:18px;margin-bottom:30px;opacity:0;}
+.hero button{padding:12px 30px;font-size:16px;border:none;border-radius:25px;background:var(--primary);color:#fff;cursor:pointer;opacity:0;}
+
+/* Car Cards */
+.models{display:flex;flex-wrap:wrap;justify-content:center;margin-top:40px;}
+.card{background:var(--card);padding:20px;margin:15px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:0.5s;width:220px;cursor:pointer;}
+.card img{width:100%;border-radius:20px;}
+.card:hover{transform:scale(1.05) translateY(-5px);}
+
+/* Story Panel */
+.story-panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1001;padding:20px;overflow-y:auto;}
+.story-panel.active{display:flex;}
+.story-panel img{max-width:400px;border-radius:20px;margin-bottom:20px;}
+.story-panel h2{font-size:36px;margin-bottom:10px;}
+.story-panel p{font-size:16px;line-height:1.5;margin-bottom:20px;max-width:600px;text-align:left;}
+.story-panel button{padding:10px 25px;border:none;border-radius:20px;background:var(--primary);color:#fff;cursor:pointer;margin:5px;}
+
+/* Customisation Panel */
+.custom-panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);display:none;flex-direction:column;align-items:center;justify-content:flex-start;z-index:1002;padding:40px 20px;overflow-y:auto;}
+.custom-panel.active{display:flex;}
+.custom-car{position:relative;width:350px;height:200px;margin-bottom:20px;}
+.custom-car img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;border-radius:15px;}
+
+/* Color Picker & Part Selector */
+.control-panel{display:flex;flex-wrap:wrap;justify-content:center;margin:10px 0;}
+.control-panel select, .control-panel input[type=color]{margin:5px;cursor:pointer;}
+
+/* Footer */
+footer{padding:40px;text-align:center;opacity:0.6;font-size:14px;}
+</style>
+</head>
+<body>
+
+<!-- Credit & Settings -->
+<div class="credit-btn"><p>BMW M SERIES</p><p>Created by</p><p><strong>Sunveer</strong></p></div>
+<div class="hamburger" onclick="toggleSettings()"><div></div><div></div><div></div></div>
+<div class="settings" id="settings">
+<h3>Theme</h3>
+<button class="btn" onclick="setDark()">Dark</button>
+<button class="btn" onclick="setLight()">Light</button>
+<button class="btn" onclick="setBMW()">BMW Blue</button>
+<hr style="margin:15px 0;opacity:0.3;">
+<h3>Accent Color</h3>
+<button class="btn" onclick="changeColor('#0d47a1')">Blue</button>
+<button class="btn" onclick="changeColor('#c62828')">Red</button>
+<button class="btn" onclick="changeColor('#ffffff')">White</button>
+<button class="btn" onclick="changeColor('#00ffcc')">Neon</button>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+<h1>BMW M SERIES</h1>
+<p>Ultimate Driving Machine Experience</p>
+<button onclick="scrollToCars()">Start Experience</button>
+</section>
+
+<!-- Car Series -->
+<section>
+<h2>M Competition Series</h2>
+<div class="models">
+  <div class="card" onclick="openStory(0)"><img src="https://i.imgur.com/2iZk6Vr.png" alt="BMW M1"><h3>BMW M1</h3></div>
+  <div class="card" onclick="openStory(1)"><img src="https://i.imgur.com/Gy9wQak.png" alt="BMW M2"><h3>BMW M2</h3></div>
+  <div class="card" onclick="openStory(2)"><img src="https://i.imgur.com/7j0fRyy.png" alt="BMW M3"><h3>BMW M3</h3></div>
+  <div class="card" onclick="openStory(3)"><img src="https://i.imgur.com/e7V47je.png" alt="BMW M4"><h3>BMW M4</h3></div>
+  <div class="card" onclick="openStory(4)"><img src="https://i.imgur.com/buW3kH6.png" alt="BMW M5"><h3>BMW M5</h3></div>
+</div>
+</section>
+
+<!-- Story Panel -->
+<div class="story-panel" id="storyPanel">
+  <img id="storyImg" src="" alt="Car Image">
+  <h2 id="storyTitle"></h2>
+  <p id="storyText"></p>
+  <button onclick="openCustom()">Customize Car</button>
+  <button onclick="closeStory()">Close</button>
+</div>
+
+<!-- Customisation Panel -->
+<div class="custom-panel" id="customPanel">
+  <div class="custom-car" id="customCar">
+    <img src="" class="part body" id="bodyLayer">
+    <img src="" class="part bumper" id="bumperLayer">
+    <img src="" class="part wheels" id="wheelsLayer">
+    <img src="" class="part mirrors" id="mirrorsLayer">
+    <img src="" class="part windows" id="windowsLayer">
+    <img src="" class="part spoiler" id="spoilerLayer">
+  </div>
+  
+  <!-- Controls -->
+  <div class="control-panel">
+    <label>Body Color:</label><input type="color" id="bodyColor" onchange="changePartColor('body',this.value)">
+    <label>Bumper Style:</label>
+    <select id="bumperStyle" onchange="changePart('bumper',this.value)">
+      <option value="https://i.imgur.com/2iZk6Vr.png">Default</option>
+      <option value="https://i.imgur.com/XsWpH2p.png">Sport</option>
+      <option value="https://i.imgur.com/yU6ZP9B.png">Aggressive</option>
+    </select>
+    <label>Wheels Style:</label>
+    <select id="wheelsStyle" onchange="changePart('wheels',this.value)">
+      <option value="https://i.imgur.com/2iZk6Vr.png">Default</option>
+      <option value="https://i.imgur.com/Ua5JrDd.png">Alloy</option>
+      <option value="https://i.imgur.com/k1XplkV.png">Racing</option>
+    </select>
+    <label>Mirrors Color:</label><input type="color" id="mirrorsColor" onchange="changePartColor('mirrors',this.value)">
+    <label>Spoiler Style:</label>
+    <select id="spoilerStyle" onchange="changePart('spoiler',this.value)">
+      <option value="https://i.imgur.com/2iZk6Vr.png">Default</option>
+      <option value="https://i.imgur.com/ZD8h0vG.png">Sport</option>
+      <option value="https://i.imgur.com/kKZdY8Q.png">GT</option>
+    </select>
+  </div>
+  
+  <button onclick="closeCustom()">Close Customisation</button>
+</div>
+
+<footer>© 2026 BMW M SERIES — Sunveer</footer>
+
+<script>
+// GSAP Hero Animation
+gsap.to('.hero h1',{duration:1.2,opacity:1,y:-20});
+gsap.to('.hero p',{duration:1.2,opacity:1,y:-20,delay:0.3});
+gsap.to('.hero button',{duration:1,opacity:1,y:-20,delay:0.6});
+
+// Scroll to Cars
+function scrollToCars(){document.querySelector('.models').scrollIntoView({behavior:'smooth'});}
+
+// Settings
+function toggleSettings(){document.getElementById('settings').classList.toggle('active');}
+function setDark(){document.documentElement.style.setProperty('--bg','#000');document.documentElement.style.setProperty('--card','#111');document.documentElement.style.setProperty('--text','#fff');}
+function setLight(){document.documentElement.style.setProperty('--bg','#f2f2f2');document.documentElement.style.setProperty('--card','#fff');document.documentElement.style.setProperty('--text','#000');}
+function setBMW(){document.documentElement.style.setProperty('--bg','#001f4d');document.documentElement.style.setProperty('--card','#002b80');document.documentElement.style.setProperty('--text','#fff');}
+function changeColor(color){document.documentElement.style.setProperty('--primary',color);}
+
+// Car Stories
+const cars=[
+{name:'BMW M1',img:'https://i.imgur.com/2iZk6Vr.png',text:`The BMW M1 was BMW's first mid-engine sports car... (full 3-4 paragraphs)`},
+{name:'BMW M2',img:'https://i.imgur.com/Gy9wQak.png',text:`The BMW M2 is a compact powerhouse... (full 3-4 paragraphs)`},
+{name:'BMW M3',img:'https://i.imgur.com/7j0fRyy.png',text:`The BMW M3 is the perfect blend... (full 3-4 paragraphs)`},
+{name:'BMW M4',img:'https://i.imgur.com/e7V47je.png',text:`The BMW M4 is a track-focused sports coupe... (full 3-4 paragraphs)`},
+{name:'BMW M5',img:'https://i.imgur.com/buW3kH6.png',text:`The BMW M5 is the ultimate high-performance luxury sedan... (full 3-4 paragraphs)`}
+];
+
+let currentCar=0;
+function openStory(index){
+  currentCar=index;
+  document.getElementById('storyPanel').classList.add('active');
+  document.getElementById('storyImg').src=cars[index].img;
+  document.getElementById('storyTitle').innerText=cars[index].name;
+  document.getElementById('storyText').innerText=cars[index].text;
+}
+function closeStory(){document.getElementById('storyPanel').classList.remove('active');}
+
+// Customisation
+function openCustom(){
+  document.getElementById('customPanel').classList.add('active');
+  const img=cars[currentCar].img;
+  document.getElementById('bodyLayer').src=img;
+  document.getElementById('bumperLayer').src=img;
+  document.getElementById('wheelsLayer').src=img;
+  document.getElementById('mirrorsLayer').src=img;
+  document.getElementById('windowsLayer').src=img;
+  document.getElementById('spoilerLayer').src=img;
+}
+function closeCustom(){document.getElementById('customPanel').classList.remove('active');}
+
+// Dynamic Color
+function changePartColor(part,color){
+  const map={'body':'bodyLayer','bumper':'bumperLayer','wheels':'wheelsLayer','mirrors':'mirrorsLayer'};
+  const layer=document.getElementById(map[part]);
+  layer.style.filter='none';
+  layer.style.backgroundColor=color;
+  layer.style.mixBlendMode='multiply';
+}
+
+// Change Part Image
+function changePart(part,url){
+  const map={'bumper':'bumperLayer','wheels':'wheelsLayer','spoiler':'spoilerLayer'};
+  document.getElementById(map[part]).src=url;
+}
+</script>
+</body>
+  </html>
